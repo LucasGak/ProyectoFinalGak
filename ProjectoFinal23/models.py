@@ -1,5 +1,6 @@
 from django.db import models
 
+
 #Creados los modelos curso, estudiante, profesor y entregable
 
 class Curso(models.Model):
@@ -31,3 +32,4 @@ class Entregable(models.Model):
     entregado=models.BooleanField()
     def __str__(self):
         return f"Nombre: {self.nombre} - Fecha De Entrega: {self.FechaDeEntrega} - Entregado: {self.entregado}"
+

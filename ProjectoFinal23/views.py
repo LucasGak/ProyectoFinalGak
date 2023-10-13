@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from .models import *
 from ProjectoFinal23.forms import BuscaCursoForm, CursoFormulario, ProfesorFormulario
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.urls import reverse_lazy
+from django.views.generic.edit import DeleteView, UpdateView, CreateView
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
 
 
 def inicio(request):
@@ -142,3 +148,50 @@ def editarProfesor(request, profesor_id):
 
     #HTML que permite editar
     return render(request, "ProjectoFinal23/formulario_api.html", {"miFormulario":miFormulario, "profesor_id":profesor_id})
+
+class CursoList(ListView):
+    model=Curso
+    template_name = "ProjectoFinal23/cursos_list.html"
+
+class CursoDetalle(DetailView):
+    model=Curso
+    template_name = "ProjectoFinal23/curso_detalle.html"
+
+class CursoCreacion(CreateView):
+    model=Curso
+    success_url="ProjectoFinal23/curso/list"
+    fields = ['nombre','camada']
+
+class CursoUpdate(UpdateView):
+    model=Curso
+    success_url="ProjectoFinal23/curso/list"
+    fields=['nombre','camada']
+
+class CursoDelete(DeleteView):
+    model=Curso
+    success_url="ProjectoFinal23/curso/list"
+
+def login_request(request):
+
+    if request.method == "POST":
+        form=AuthenticationForm(request, data = request.POST)
+
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(username=usuario, password=password)
+
+            if user is not None:
+                login(request, user)
+
+                return render(request,"ProjectoFinal23/padre.html", {"Mensaje":f"Bienvenido {usuario}"} )
+            else:
+                return render(request,"ProjectoFinal23/padre.html", {"Mensaje":"ERROR, datos incorrectos"} )
+            
+        else:
+                return render(request,"ProjectoFinal23/padre.html", {"Mensaje":"ERROR, FORMULARIO ERRONEO"} )
+        
+    form = AuthenticationForm()
+
+    return render(request,"ProjectoFinal23/padre.html", {'form':form} )

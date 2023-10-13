@@ -14,4 +14,10 @@ urlpatterns = [
     path('leerProfesores', views.leerProfesores, name = "LeerProfesores"),
     path('eliminarProfesor/<int:profesor_id>/', views.eliminarProfesor, name="EliminarProfesor"),
     path('editarProfesor/<int:profesor_id>/', views.editarProfesor, name="EditarProfesor"),
+    path('curso/list', views.CursoList.as_view(), name='List'),
+    path(r'^(?P<pk>\d+)$', views.CursoDetalle.as_view(), name='Detail'),
+    path(r'^nuevo$', views.CursoCreacion.as_view(), name='New'),
+    path(r'^editar/(?P<pk>\d+)$', views.CursoUpdate.as_view(), name='Edit'),
+    path(r'^borrar/(?P<pk>\d+)$', views.CursoDelete.as_view(), name='Delete'),
+    path('login', views.login_request, name="Login"),
 ]

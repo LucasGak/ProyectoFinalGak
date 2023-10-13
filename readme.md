@@ -19,4 +19,6 @@ Aca voy a ir dejando data de lo que se hizo hasta ahora para seguir al dia sigui
 
 - Creado el CRUD para editar profesores
 
-- queda lo de poder eliminar por ID
+- Cambie la vista de la lista de profesores, se puede ver y editar de una mejor manera
+
+Queda pendiente la parte de login, registro en adelante
