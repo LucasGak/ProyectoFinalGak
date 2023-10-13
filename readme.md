@@ -15,6 +15,8 @@ Aca voy a ir dejando data de lo que se hizo hasta ahora para seguir al dia sigui
 
 - Creado el CRUD de CREATE para agregar profesores
 
-- FALTA EL CRUD PARA ELIMINAR
+- Creado el CRUD para eliminar profesores
+
+- Creado el CRUD para editar profesores
 
 - queda lo de poder eliminar por ID

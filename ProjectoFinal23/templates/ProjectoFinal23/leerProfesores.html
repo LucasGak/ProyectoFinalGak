@@ -1,28 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leer Profesores</title>
-</head>
-<body>
+{% extends 'ProjectoFinal23/padre.html' %}
 
+{% load static %}
+
+{% block section1 %}
+
+<ul>
     {% for p in profesores %}
         
-        <li>{{p}}</li>
-        <button>
-        
-            <a href="{% url 'EliminarProfesor' p.id %}"> Eliminar Profesor</a>
-        
-        </button>
-
-
-    {% endfor %}
+    <li>{{p}}</li>
     <button>
         
-        <a href="{% url 'profesores' %}"> Volver a profesores</a>
-    
+        <a href="{% url 'EliminarProfesor' p.id %}"> Eliminar Profesor</a>
+        <a href="{% url 'EditarProfesor' p.id %}">Editar</a>
+        
     </button>
+
+
+{% endfor %}
+</ul> 
+<button>
+        
+    <li><a href="{% url 'profesores' %}"> Volver a profesores</a></li>
     
-</body>
-</html>
+</button> 
+{% endblock %}

@@ -116,3 +116,29 @@ def eliminarProfesor(request, profesor_id):
     contexto = {"profesores": profesores}
  
     return render(request, "ProjectoFinal23/leerProfesores.html", contexto)
+
+def editarProfesor(request, profesor_id):
+    #Si es metodo POST hago lo mismo que el agregar
+    if request.method== 'POST':
+
+        miFormulario = ProfesorFormulario(request.POST) #Aca llega la informacion del HTML
+
+        if miFormulario.is_valid(): #Si paso la validacion de Django
+
+            informacion = miFormulario.cleaned_data
+
+            profesor = Profesor.objects.get(id=(profesor_id))
+            profesor.nombre = informacion['nombre']
+            profesor.apellido = informacion['apellido']
+            profesor.email = informacion['email']
+            profesor.profesion = informacion['profesion']
+            profesor.save()
+
+            return render(request, "ProjectoFinal23/padre.html") #Vuelvo al inicio
+    
+    else:
+        profesor = Profesor.objects.get(id=(profesor_id))
+        miFormulario= ProfesorFormulario(initial={'nombre': profesor.nombre, 'apellido':profesor.apellido, 'email':profesor.email, 'profesion':profesor.profesion})
+
+    #HTML que permite editar
+    return render(request, "ProjectoFinal23/formulario_api.html", {"miFormulario":miFormulario, "profesor_id":profesor_id})
