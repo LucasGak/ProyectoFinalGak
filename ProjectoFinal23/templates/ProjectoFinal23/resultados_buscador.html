@@ -1,0 +1,17 @@
+{% extends 'ProjectoFinal23/padre.html' %}
+
+{% load static %}
+
+{% block section1 %}
+
+
+    <ul>
+        {% for curso in cursos %}
+
+        <p>Nombre de curso: </p><li> {{ curso.nombre }} </li></p>
+
+        <p>Numero Camada: <li> {{ curso.camada }} </li></p>
+
+        {% endfor %}
+    </ul>
+{% endblock %}

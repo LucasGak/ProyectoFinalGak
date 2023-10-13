@@ -1,0 +1,36 @@
+{% extends 'ProjectoFinal23/padre.html' %}
+
+{% load static %}
+
+{% block section1 %}
+
+
+
+
+    <form action="" method="POST">{% csrf_token %}
+        
+        
+        <table>
+        
+        
+            {{ miFormulario.as_table }}
+        
+        
+        </table>
+        
+        
+        <input type="submit" value="Registrar Profesor">
+
+    </form>
+    <!-- Content Row-->
+    <div class="row gx-4 gx-lg-5">
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Listado de profesores</h2>
+                    <p class="card-text">Esta es la lista de profesores</p>
+                </div>
+                <div class="card-footer"><a class="btn btn-primary btn-sm" href="{% url 'LeerProfesores' %}">Ver lista</a></div>
+            </div>
+        </div>
+{% endblock %}
