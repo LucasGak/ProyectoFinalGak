@@ -10,5 +10,11 @@ Aca voy a ir dejando data de lo que se hizo hasta ahora para seguir al dia sigui
 - cree el usuario profesor clave Final2323
 - Le di un par de toques de front a la web aunque desconozco totalmente HTML, fui siguiendo lo que fue haciendo el profe en las clases
  y fui adaptando segun lo que necesitaba hacer
+ 
+- Creado el CRUD de READ para ver la lista de profesores
+
+- Creado el CRUD de CREATE para agregar profesores
+
+- FALTA EL CRUD PARA ELIMINAR
 
 - queda lo de poder eliminar por ID

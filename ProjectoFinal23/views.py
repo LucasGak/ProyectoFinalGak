@@ -105,9 +105,9 @@ def leerProfesores(request):
 
     return render(request, "ProjectoFinal23/leerProfesores.html",contexto)
 
-def eliminarProfesor(request, profesor_nombre):
+def eliminarProfesor(request, profesor_id):
  
-    profesor = Profesor.objects.get(nombre=profesor_nombre)
+    profesor = Profesor.objects.get(id=int(profesor_id))
     profesor.delete()
  
     # vuelvo al menú

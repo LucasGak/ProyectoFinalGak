@@ -12,5 +12,5 @@ urlpatterns = [
     path('formulario_api/', views.formulario_api, name="formulario_api"),
     path('buscador_curso/', views.buscador_curso, name="buscador_curso"),
     path('leerProfesores', views.leerProfesores, name = "LeerProfesores"),
-    path('eliminarProfesor/<profesor_nombre>/', views.eliminarProfesor, name="EliminarProfesor")
+    path('eliminarProfesor/<int:profesor_id>/', views.eliminarProfesor, name="EliminarProfesor")
 ]
