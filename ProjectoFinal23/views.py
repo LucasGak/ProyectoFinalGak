@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from .models import *
 from ProjectoFinal23.forms import BuscaCursoForm, CursoFormulario, ProfesorFormulario
-from django.views.generic import ListView
-from django.views.generic.detail import DetailView
-from django.urls import reverse_lazy
-from django.views.generic.edit import DeleteView, UpdateView, CreateView
+# from django.views.generic import ListView
+# from django.views.generic.detail import DetailView
+# from django.urls import reverse_lazy
+# from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 
@@ -149,27 +149,27 @@ def editarProfesor(request, profesor_id):
     #HTML que permite editar
     return render(request, "ProjectoFinal23/formulario_api.html", {"miFormulario":miFormulario, "profesor_id":profesor_id})
 
-class CursoList(ListView):
-    model=Curso
-    template_name = "ProjectoFinal23/cursos_list.html"
+# class CursoList(ListView):
+#     model=Curso
+#     template_name = "ProjectoFinal23/cursos_list.html"
 
-class CursoDetalle(DetailView):
-    model=Curso
-    template_name = "ProjectoFinal23/curso_detalle.html"
+# class CursoDetalle(DetailView):
+#     model=Curso
+#     template_name = "ProjectoFinal23/curso_detalle.html"
 
-class CursoCreacion(CreateView):
-    model=Curso
-    success_url="ProjectoFinal23/curso/list"
-    fields = ['nombre','camada']
+# class CursoCreacion(CreateView):
+#     model=Curso
+#     success_url="ProjectoFinal23/curso/list"
+#     fields = ['nombre','camada']
 
-class CursoUpdate(UpdateView):
-    model=Curso
-    success_url="ProjectoFinal23/curso/list"
-    fields=['nombre','camada']
+# class CursoUpdate(UpdateView):
+#     model=Curso
+#     success_url="ProjectoFinal23/curso/list"
+#     fields=['nombre','camada']
 
-class CursoDelete(DeleteView):
-    model=Curso
-    success_url="ProjectoFinal23/curso/list"
+# class CursoDelete(DeleteView):
+#     model=Curso
+#     success_url="ProjectoFinal23/curso/list"
 
 def login_request(request):
 
@@ -182,16 +182,58 @@ def login_request(request):
 
             user = authenticate(username=usuario, password=password)
 
-            if user is not None:
+            if usuario is not None:
                 login(request, user)
 
                 return render(request,"ProjectoFinal23/padre.html", {"Mensaje":f"Bienvenido {usuario}"} )
             else:
-                return render(request,"ProjectoFinal23/padre.html", {"Mensaje":"ERROR, datos incorrectos"} )
+
+                form = AuthenticationForm()
+                return render(request,"ProjectoFinal23/login.html", {"Mensaje":"ERROR, datos incorrectos", 'form':form} )
             
         else:
+
                 return render(request,"ProjectoFinal23/padre.html", {"Mensaje":"ERROR, FORMULARIO ERRONEO"} )
         
     form = AuthenticationForm()
 
-    return render(request,"ProjectoFinal23/padre.html", {'form':form} )
+    return render(request,"ProjectoFinal23/login.html", {'form':form} )
+
+def register(request):
+    
+    if request.method == 'POST':
+
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+
+            username = form.cleaned_data['username']
+            form.save()
+            return render (request, "ProjectoFinal23/padre.html", {"mensaje": "Usuario Creado" })
+        
+    else:
+        form = UserCreationForm()
+
+    return render(request, "ProjectoFinal23/registro.html", {'form':form})
+
+def registroProfesores(request):
+    
+    if request.method == 'POST':
+
+        miFormulario = ProfesorFormulario(request.POST) #aqui me llega toda la informacion del html
+
+        print(miFormulario)
+
+        if miFormulario.is_valid: #Si paso la validacion de Django
+            informacion = miFormulario.cleaned_data
+
+            profesor = Profesor (nombre=informacion['nombre'], apellido=informacion['apellido'],
+            email=informacion['email'], profesion=informacion['profesion'])
+            
+            profesor.save()
+
+            return render(request, "ProjectoFinal23/padre.html") #vuelvo al inicio o donde quieran
+        
+    else:
+        miFormulario=ProfesorFormulario() #Formulario vacio para construir el html
+    
+    return render(request, "ProjectoFinal23/registroProfesores.html", {"miFormulario":miFormulario})

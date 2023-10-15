@@ -2,15 +2,14 @@
 {% load static %}
     
 {% block section1 %}
+    <h2>{{ mensaje }}</h2>
 
-    <h2>{{ Mensaje }}</h2>
-    
+
     <form action="" method="POST">
-        {% csrf_token %}
 
+        {% csrf_token %}
         {{ form.as_p }}
 
-        <button type="submit">Inciar sesion</button>
+    <button type="submit">Registrarse</button>
     </form>
-
-{% endblock %}
+{% endblock section1 %}

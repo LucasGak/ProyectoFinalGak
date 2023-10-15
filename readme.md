@@ -21,4 +21,5 @@ Aca voy a ir dejando data de lo que se hizo hasta ahora para seguir al dia sigui
 
 - Cambie la vista de la lista de profesores, se puede ver y editar de una mejor manera
 
-Queda pendiente la parte de login, registro en adelante
+- Arreglado el login y register falta logout
+
