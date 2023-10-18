@@ -117,6 +117,13 @@ def leerProfesores(request):
 
     return render(request, "ProjectoFinal23/leerProfesores.html",contexto)
 
+def leerEstudiantes(request):
+    estudiantes = Estudiante.objects.all()
+
+    contexto = {"estudiantes":estudiantes}
+
+    return render(request, "ProjectoFinal23/leerEstudiantes.html",contexto)
+
 def eliminarProfesor(request, profesor_id):
  
     profesor = Profesor.objects.get(id=int(profesor_id))

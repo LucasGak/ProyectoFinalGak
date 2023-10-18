@@ -1,0 +1,21 @@
+{% extends 'ProjectoFinal23/padre.html' %}
+
+{% load static %}
+
+{% block section1 %}
+
+<ul>
+    {% for p in estudiantes %}
+        
+    <li>{{p}}</li>
+
+
+
+{% endfor %}
+</ul> 
+<button>
+        
+    <li><a href="{% url 'estudiantes' %}"> Volver a Estudiantes</a></li>
+    
+</button> 
+{% endblock %}
