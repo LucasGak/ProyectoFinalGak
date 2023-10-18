@@ -3,16 +3,21 @@
 {% load static %}
 
 {% block section1 %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>entregables</title>
-</head>
-<p>Pagina de Entregables</p>
+<h1>Esta es la pagina de entregables</h1>
+<p>En esta seccion figura si los profesores entregaron las evaluaciones de sus respectivos cursos</p>
+<ul>
+    {% for p in entregables %}
+        
+    <li>{{p}}</li>
+
+
+{% endfor %}
+</ul> 
+<button>
+        
+    <li><a href="{% url 'inicio' %}"> Volver al inicio</a></li>
+    <li><a href="{% url 'cursos' %}"> ir a cursos</a></li>
+    <li><a href="{% url 'profesores' %}"> ir a profesores</a></li>
     
-</body>
-</html>
+</button> 
 {% endblock %}

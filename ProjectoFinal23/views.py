@@ -32,8 +32,11 @@ def estudiantes(request):
 
 @login_required
 def entregables(request):
+    entregables = Entregable.objects.all()
 
-    return render(request, "ProjectoFinal23/entregables.html")
+    contexto = {"entregables":entregables}
+
+    return render(request, "ProjectoFinal23/entregables.html", contexto)
 
 def cursoFormulario(request):
       
@@ -173,17 +176,17 @@ class CursoDetalle(DetailView):
 
 class CursoCreacion(CreateView):
     model=Curso
-    success_url="ProjectoFinal23/curso/list"
+    success_url="/ProjectoFinal23/curso/list"
     fields = ['nombre','camada']
 
 class CursoUpdate(UpdateView):
     model=Curso
-    success_url="ProjectoFinal23/curso/list"
+    success_url="/ProjectoFinal23/curso/list"
     fields=['nombre','camada']
 
 class CursoDelete(DeleteView):
      model=Curso
-     success_url="ProjectoFinal23/curso/list"
+     success_url="/ProjectoFinal23/curso/list"
 #
 def login_request(request):
 
