@@ -1,14 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logout</title>
-</head>
+{% extends "ProjectoFinal23/padre.html" %}
+{% load static %}
+    
+{% block section1 %}
 <body>
     
     <h1>Cerraste sesion, hasta la proxima :) </h1>
- 
+
+<button>
+        
+    <li><a href="{% url 'inicio' %}"> Volver a inicio</a></li>
+    
+</button>
+<button>
+        
+    <p>O podes iniciar sesion nuevamente<a href="{% url 'login' %}"> login</a></p>
+    
+</button>  
+
 </body>
-</html>
+{% endblock %}

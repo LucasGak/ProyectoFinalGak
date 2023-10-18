@@ -1,4 +1,14 @@
-- PROYECTO FINAL - CURSO PYTHON CODERHOUSE - LUCAS GAK COMISION 47770
+# PROYECTO FINAL - CURSO PYTHON CODERHOUSE - LUCAS GAK COMISION 47770
+
+# Nombre del proyecto
+    SMART TRAINING
+
+# Version
+    0.1
+
+## Descripcion del proyecto
+
+Es una pagina web en la que alumnos que quieren entrar a esta academia de educacion fisica orientada a distintas disciplinas se puede registrar
 
 Aca voy a ir dejando data de lo que se hizo hasta ahora para seguir al dia siguiente
 - Arme una web Django con patrón MVT
