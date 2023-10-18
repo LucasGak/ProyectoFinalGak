@@ -1,22 +1,27 @@
 from django.shortcuts import render
 from .models import *
-from ProjectoFinal23.forms import BuscaCursoForm, CursoFormulario, ProfesorFormulario
-# from django.views.generic import ListView
-# from django.views.generic.detail import DetailView
-# from django.urls import reverse_lazy
-# from django.views.generic.edit import DeleteView, UpdateView, CreateView
+from ProjectoFinal23.forms import BuscaCursoForm, CursoFormulario, ProfesorFormulario, EstudianteFormulario
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.urls import reverse_lazy
+from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from .forms import UserEditForm
+
 
 
 def inicio(request):
 
     return render(request, "ProjectoFinal23/index.html")
 
+@login_required
 def cursos(request):
 
     return render(request, "ProjectoFinal23/cursos.html")
 
+@login_required
 def profesores(request):
 
     return render(request, "ProjectoFinal23/profesores.html")
@@ -25,6 +30,7 @@ def estudiantes(request):
 
     return render(request, "ProjectoFinal23/estudiantes.html")
 
+@login_required
 def entregables(request):
 
     return render(request, "ProjectoFinal23/entregables.html")
@@ -39,7 +45,7 @@ def cursoFormulario(request):
  
             return render(request, "ProjectoFinal23/padre.html")
  
-      return render(request,"ProjectoFinal23/cursoFormulario.html")
+      return render(request,"ProjectoFinal23/formulario_api.html")
 
 def formulario_api(request):
     if request.method == "POST":
@@ -149,28 +155,29 @@ def editarProfesor(request, profesor_id):
     #HTML que permite editar
     return render(request, "ProjectoFinal23/formulario_api.html", {"miFormulario":miFormulario, "profesor_id":profesor_id})
 
-# class CursoList(ListView):
-#     model=Curso
-#     template_name = "ProjectoFinal23/cursos_list.html"
+#
+class CursoList(ListView):
+     model=Curso
+     template_name = "ProjectoFinal23/cursos_list.html"
 
-# class CursoDetalle(DetailView):
-#     model=Curso
-#     template_name = "ProjectoFinal23/curso_detalle.html"
+class CursoDetalle(DetailView):
+    model=Curso
+    template_name = "ProjectoFinal23/curso_detalle.html"
 
-# class CursoCreacion(CreateView):
-#     model=Curso
-#     success_url="ProjectoFinal23/curso/list"
-#     fields = ['nombre','camada']
+class CursoCreacion(CreateView):
+    model=Curso
+    success_url="ProjectoFinal23/curso/list"
+    fields = ['nombre','camada']
 
-# class CursoUpdate(UpdateView):
-#     model=Curso
-#     success_url="ProjectoFinal23/curso/list"
-#     fields=['nombre','camada']
+class CursoUpdate(UpdateView):
+    model=Curso
+    success_url="ProjectoFinal23/curso/list"
+    fields=['nombre','camada']
 
-# class CursoDelete(DeleteView):
-#     model=Curso
-#     success_url="ProjectoFinal23/curso/list"
-
+class CursoDelete(DeleteView):
+     model=Curso
+     success_url="ProjectoFinal23/curso/list"
+#
 def login_request(request):
 
     if request.method == "POST":
@@ -193,7 +200,7 @@ def login_request(request):
             
         else:
 
-                return render(request,"ProjectoFinal23/padre.html", {"Mensaje":"ERROR, FORMULARIO ERRONEO"} )
+                return render(request,"ProjectoFinal23/padre.html", {"Mensaje":"Nombre de usuario inexistente, o clave incorrecta."} )
         
     form = AuthenticationForm()
 
@@ -221,9 +228,7 @@ def registroProfesores(request):
 
         miFormulario = ProfesorFormulario(request.POST) #aqui me llega toda la informacion del html
 
-        print(miFormulario)
-
-        if miFormulario.is_valid: #Si paso la validacion de Django
+        if miFormulario.is_valid(): #Si paso la validacion de Django
             informacion = miFormulario.cleaned_data
 
             profesor = Profesor (nombre=informacion['nombre'], apellido=informacion['apellido'],
@@ -236,4 +241,56 @@ def registroProfesores(request):
     else:
         miFormulario=ProfesorFormulario() #Formulario vacio para construir el html
     
-    return render(request, "ProjectoFinal23/registroProfesores.html", {"miFormulario":miFormulario})
+    return render(request, "ProjectoFinal23/formulario_api.html", {"miFormulario":miFormulario})
+
+def registroEstudiante(request):
+    
+    if request.method == 'POST':
+
+        miFormulario = EstudianteFormulario(request.POST)
+
+
+        if miFormulario.is_valid(): 
+            informacion = miFormulario.cleaned_data
+
+            estudiante = Estudiante(nombre=informacion['nombre'], apellido=informacion['apellido'],
+            email=informacion['email'])
+            
+            estudiante.save()
+
+            return render(request, "ProjectoFinal23/padre.html") 
+        
+    else:
+        miFormulario=EstudianteFormulario()
+    
+    return render(request, "ProjectoFinal23/formulario_api.html", {"miFormulario":miFormulario})
+
+@login_required
+def editarPerfil(request):
+
+    usuario = request.user
+
+    if request.method == 'POST':
+        
+        miFormulario = UserEditForm(request.POST)
+        if miFormulario.is_valid():
+
+            informacion = miFormulario.cleaned_data
+
+            usuario.email=informacion['email']
+            usuario.password1=informacion['password1']
+            usuario.password2=informacion['password1']
+            usuario.last_name=informacion['last_name']
+            usuario.first_name=informacion['first_name']
+            
+            usuario.save()
+
+            return render(request, "ProjectoFinal23/padre.html")
+        
+    else:
+        datos = {'first_name': usuario.first_name, 'last_name':usuario.last_name, 'email': usuario.email, }
+        miFormulario= UserEditForm(initial=datos)
+
+    return render(request, "ProjectoFinal23/editarPerfil.html", {"miFormulario":miFormulario, "usuario":usuario})
+
+    return render(request, "ProjectoFinal23/padre.html", {"miFormulario":miFormulario, "usuario":usuario})

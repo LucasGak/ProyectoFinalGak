@@ -20,6 +20,14 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item"><span class="text-light"><strong>{{request.user.first_name}}</strong></span></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'editarPerfil' %}"><span class="text-primary">Perfil</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><span class="text-primary">Logout</span></a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><span class="text-primary">Login</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}"><span class="text-primary">Registrate</span></a></li>
+                      {% endif %}
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'cursos' %}">Cursos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'entregables' %}">Entregables</a></li>
@@ -37,8 +45,7 @@
                 <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="https://iespericberne.edu.pe/wp-content/uploads/2021/04/profesor-educacion-fisica-1.jpg" alt="..." /></div>
                 <div class="col-lg-5">
                     <h1 class="font-weight-light">Smart Training</h1>
-                    <p>Bienvenido a Smart Training, esta es una pagina de entrenamiento fisico</p>
-                    <a class="btn btn-primary" href="#!">Este boton no hace nada</a>
+                    <p>Bienvenido a Smart Training, esta es una pagina de entrenamiento fisico, con rutinas armadas de manera inteligente y eficiente</p>
                 </div>
             </div>
             <!-- Call to Action-->

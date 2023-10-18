@@ -1,0 +1,26 @@
+{% extends 'ProjectoFinal23/padre.html' %}
+
+{% load static %}
+
+{% block section1 %}
+
+<ul>
+    {% for p in cursos %}
+        
+    <li>{{p}}</li>
+    <button>
+        
+        <a href="{% url 'EliminarProfesor' p.id %}"> Eliminar</a>
+        <a href="{% url 'EditarProfesor' p.id %}">Editar</a>
+        
+    </button>
+
+
+{% endfor %}
+</ul> 
+<button>
+        
+    <li><a href="{% url 'profesores' %}"> Volver a profesores</a></li>
+    
+</button> 
+{% endblock %}

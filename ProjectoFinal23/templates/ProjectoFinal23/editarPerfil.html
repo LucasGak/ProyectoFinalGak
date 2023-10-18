@@ -1,0 +1,23 @@
+{% extends "ProjectoFinal23/padre.html" %}
+{% load static %}
+    
+{% block section1 %}
+
+    <h2>{{ Mensaje }}</h2>
+    <h1> Formulario - Editar Perfil</h1>
+    <h1> de {{usuario}}</h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+
+
+    <table>
+    
+        {{ miFormulario.as_table }}
+    
+    </table>
+    
+    <input type="submit", value="Enviar">
+
+</form>
+{% endblock %}

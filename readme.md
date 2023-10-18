@@ -23,3 +23,10 @@ Aca voy a ir dejando data de lo que se hizo hasta ahora para seguir al dia sigui
 
 - Arreglado el login y register falta logout
 
+- Cambiada la pagina de profesores LISTA
+
+- Hay que arreglar el formulario de registro de estudiantes y que vaya directo a estudiantes en la base de datos
+
+- Arreglado el logout, y edicion de perfiles de usuario, aunque todavia no se pueden cambiar las contraseñas
+
+- Arreglada la vista, ahora muestra el usuario logeado, estan los links para editar el perfil y desloguearse
