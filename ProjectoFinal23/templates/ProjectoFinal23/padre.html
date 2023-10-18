@@ -21,7 +21,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         {% if request.user.is_authenticated %}
-                        <li class="nav-item"><span class="text-light"><strong>{{request.user.first_name}}</strong></span></li>
+                        <li class="nav-item"><span class="text-light"><strong>{{request.user.username}}</strong></span></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'editarPerfil' %}"><span class="text-primary">Perfil</span></a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><span class="text-primary">Logout</span></a></li>
                         {% else %}
@@ -30,7 +30,7 @@
                       {% endif %}
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'cursos' %}">Cursos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'entregables' %}">Entregables</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'examenes' %}">Examenes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'estudiantes' %}">Estudiantes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'profesores' %}">Profesores</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'buscador_curso' %}">Buscador de cursos</a></li>

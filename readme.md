@@ -8,7 +8,7 @@
 
 ## Descripcion del proyecto
 
-Es una pagina web en la que alumnos que quieren entrar a esta academia de educacion fisica orientada a distintas disciplinas se puede registrar
+Es una pagina web en la que alumnos que quieren entrar a esta academia de educacion fisica orientada a distintas disciplinas se puede registrar y elegir un curso en el momento que se registran.
 
 Aca voy a ir dejando data de lo que se hizo hasta ahora para seguir al dia siguiente
 - Arme una web Django con patrón MVT
@@ -40,3 +40,6 @@ Aca voy a ir dejando data de lo que se hizo hasta ahora para seguir al dia sigui
 - Arreglado el logout, y edicion de perfiles de usuario, aunque todavia no se pueden cambiar las contraseñas
 
 - Arreglada la vista, ahora muestra el usuario logeado, estan los links para editar el perfil y desloguearse
+
+- muchos cambios no recuerdo cuales, hay que borrar la BD de nuevo y subirla de nuevo, agregar en cursos el nombre de profesor y a los formularios
+tambien hay que hacer que dependiendo del tipo de usuario que este logeado en la pagina que tenga distintos permisos de vista y si puede borrar o editar

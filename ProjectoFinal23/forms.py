@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class CursoFormulario(forms.Form):
     curso = forms.CharField()
-    camada = forms.IntegerField()
+    comision = forms.IntegerField()
     profesor=forms.CharField()
 
 class BuscaCursoForm(forms.Form):
@@ -15,7 +15,7 @@ class ProfesorFormulario(forms.Form):
     nombre= forms.CharField(max_length=30)
     apellido= forms.CharField(max_length=30)
     email= forms.EmailField()
-    profesion= forms.CharField(max_length=30)
+    especialidad= forms.CharField(max_length=30)
 
 class EstudianteFormulario(forms.Form):
     nombre= forms.CharField(max_length=30)
@@ -24,7 +24,7 @@ class EstudianteFormulario(forms.Form):
 
 class UserEditForm(UserCreationForm):
 
-    # Obligatorios
+    
     email = forms.EmailField(label="Ingrese su email:")
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repetir la contraseña', widget=forms.PasswordInput)

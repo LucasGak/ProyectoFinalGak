@@ -31,18 +31,18 @@ def estudiantes(request):
     return render(request, "ProjectoFinal23/estudiantes.html")
 
 @login_required
-def entregables(request):
-    entregables = Entregable.objects.all()
+def examenes(request):
+    examenes = Examenes.objects.all()
 
-    contexto = {"entregables":entregables}
+    contexto = {"examenes":examenes}
 
-    return render(request, "ProjectoFinal23/entregables.html", contexto)
+    return render(request, "ProjectoFinal23/examenes.html", contexto)
 
 def cursoFormulario(request):
       
       if request.method == 'POST':
       
-            curso =  Curso(nombre=request.POST['curso'], camada=request.POST['camada'])
+            curso =  Curso(nombre=request.POST['curso'], comision=request.POST['comision'])
  
             curso.save()
  
@@ -59,7 +59,7 @@ def formulario_api(request):
         
             informacion = miFormulario.cleaned_data
         
-            curso = Curso(nombre=informacion["curso"], camada=informacion["camada"])
+            curso = Curso(nombre=informacion["curso"], comision=informacion["comision"])
         
             curso.save()
             
@@ -80,13 +80,12 @@ def profesores(request):
 
         miFormulario = ProfesorFormulario(request.POST) #aqui me llega toda la informacion del html
 
-        print(miFormulario)
 
         if miFormulario.is_valid: #Si paso la validacion de Django
             informacion = miFormulario.cleaned_data
 
             profesor = Profesor (nombre=informacion['nombre'], apellido=informacion['apellido'],
-            email=informacion['email'], profesion=informacion['profesion'])
+            email=informacion['email'], especialidad=informacion['especialidad'])
             
             profesor.save()
 
@@ -153,14 +152,14 @@ def editarProfesor(request, profesor_id):
             profesor.nombre = informacion['nombre']
             profesor.apellido = informacion['apellido']
             profesor.email = informacion['email']
-            profesor.profesion = informacion['profesion']
+            profesor.especialidad = informacion['especialidad']
             profesor.save()
 
             return render(request, "ProjectoFinal23/padre.html") #Vuelvo al inicio
     
     else:
         profesor = Profesor.objects.get(id=(profesor_id))
-        miFormulario= ProfesorFormulario(initial={'nombre': profesor.nombre, 'apellido':profesor.apellido, 'email':profesor.email, 'profesion':profesor.profesion})
+        miFormulario= ProfesorFormulario(initial={'nombre': profesor.nombre, 'apellido':profesor.apellido, 'email':profesor.email, 'especialidad':profesor.especialidad})
 
     #HTML que permite editar
     return render(request, "ProjectoFinal23/formulario_api.html", {"miFormulario":miFormulario, "profesor_id":profesor_id})
@@ -177,12 +176,12 @@ class CursoDetalle(DetailView):
 class CursoCreacion(CreateView):
     model=Curso
     success_url="/ProjectoFinal23/curso/list"
-    fields = ['nombre','camada']
+    fields = ['nombre','comision']
 
 class CursoUpdate(UpdateView):
     model=Curso
     success_url="/ProjectoFinal23/curso/list"
-    fields=['nombre','camada']
+    fields=['nombre','comision']
 
 class CursoDelete(DeleteView):
      model=Curso
@@ -242,7 +241,7 @@ def registroProfesores(request):
             informacion = miFormulario.cleaned_data
 
             profesor = Profesor (nombre=informacion['nombre'], apellido=informacion['apellido'],
-            email=informacion['email'], profesion=informacion['profesion'])
+            email=informacion['email'], especialidad=informacion['especialidad'])
             
             profesor.save()
 
