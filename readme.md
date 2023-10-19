@@ -43,3 +43,8 @@ Aca voy a ir dejando data de lo que se hizo hasta ahora para seguir al dia sigui
 
 - muchos cambios no recuerdo cuales, hay que borrar la BD de nuevo y subirla de nuevo, agregar en cursos el nombre de profesor y a los formularios
 tambien hay que hacer que dependiendo del tipo de usuario que este logeado en la pagina que tenga distintos permisos de vista y si puede borrar o editar
+
+HAY QUE ARREGLAR EL LOGIN QUE MUESTRE UN MENSAJE O ALGO DESPUES DE LOGEARSE Y DESPUES DE REGISTRARSE                 success_url = reverse_lazy('home')
+
+HAY QUE RESTRINGIR EL ACCESO A DISTINTAS CUENTAS QUE NO SEAN DE STAFF/ADMIN 
+
