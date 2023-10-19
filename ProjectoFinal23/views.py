@@ -78,10 +78,10 @@ def profesores(request):
     
     if request.method == 'POST':
 
-        miFormulario = ProfesorFormulario(request.POST) #aqui me llega toda la informacion del html
+        miFormulario = ProfesorFormulario(request.POST) 
 
 
-        if miFormulario.is_valid: #Si paso la validacion de Django
+        if miFormulario.is_valid: 
             informacion = miFormulario.cleaned_data
 
             profesor = Profesor (nombre=informacion['nombre'], apellido=informacion['apellido'],
@@ -89,10 +89,10 @@ def profesores(request):
             
             profesor.save()
 
-            return render(request, "ProjectoFinal23/padre.html") #vuelvo al inicio o donde quieran
+            return render(request, "ProjectoFinal23/padre.html") 
         
     else:
-        miFormulario=ProfesorFormulario() #Formulario vacio para construir el html
+        miFormulario=ProfesorFormulario() 
     
     return render(request, "ProjectoFinal23/profesores.html", {"miFormulario":miFormulario})
 
@@ -113,7 +113,7 @@ def buscador_curso(request):
     return render(request, "ProjectoFinal23/buscador_curso.html", {"miFormulario": miFormulario})
 
 def leerProfesores(request):
-    profesores = Profesor.objects.all() #trae todos los profesores
+    profesores = Profesor.objects.all()
 
     contexto = {"profesores":profesores}
 
@@ -131,8 +131,8 @@ def eliminarProfesor(request, profesor_id):
     profesor = Profesor.objects.get(id=int(profesor_id))
     profesor.delete()
  
-    # vuelvo al menú
-    profesores = Profesor.objects.all()  # trae todos los profesores
+
+    profesores = Profesor.objects.all() 
  
     contexto = {"profesores": profesores}
  
@@ -235,9 +235,9 @@ def registroProfesores(request):
     
     if request.method == 'POST':
 
-        miFormulario = ProfesorFormulario(request.POST) #aqui me llega toda la informacion del html
+        miFormulario = ProfesorFormulario(request.POST) 
 
-        if miFormulario.is_valid(): #Si paso la validacion de Django
+        if miFormulario.is_valid(): 
             informacion = miFormulario.cleaned_data
 
             profesor = Profesor (nombre=informacion['nombre'], apellido=informacion['apellido'],
@@ -245,10 +245,10 @@ def registroProfesores(request):
             
             profesor.save()
 
-            return render(request, "ProjectoFinal23/padre.html") #vuelvo al inicio o donde quieran
+            return render(request, "ProjectoFinal23/padre.html") 
         
     else:
-        miFormulario=ProfesorFormulario() #Formulario vacio para construir el html
+        miFormulario=ProfesorFormulario() 
     
     return render(request, "ProjectoFinal23/formulario_api.html", {"miFormulario":miFormulario})
 
@@ -278,23 +278,26 @@ def registroEstudiante(request):
 def editarPerfil(request):
 
     usuario = request.user
-
+    
     if request.method == 'POST':
         
         miFormulario = UserEditForm(request.POST)
         if miFormulario.is_valid():
 
             informacion = miFormulario.cleaned_data
+            if informacion["password1"] != informacion["password2"]:
+                datos = {'first_name': usuario.first_name,'email': usuario.email}
+                miFormulario = UserEditForm(initial=datos)
 
-            usuario.email=informacion['email']
-            usuario.password1=informacion['password1']
-            usuario.password2=informacion['password1']
-            usuario.last_name=informacion['last_name']
-            usuario.first_name=informacion['first_name']
-            
-            usuario.save()
+            else:
+                usuario.email = informacion['email']
+                if informacion["password1"]:
+                    usuario.set_password(informacion["password1"])
+                usuario.last_name = informacion['last_name']
+                usuario.first_name = informacion['first_name']
+                usuario.save()
 
-            return render(request, "ProjectoFinal23/padre.html")
+            return render(request, "ProjectoFinal23/cambioPassword.html")
         
     else:
         datos = {'first_name': usuario.first_name, 'last_name':usuario.last_name, 'email': usuario.email, }
@@ -302,7 +305,6 @@ def editarPerfil(request):
 
     return render(request, "ProjectoFinal23/editarPerfil.html", {"miFormulario":miFormulario, "usuario":usuario})
 
-    return render(request, "ProjectoFinal23/padre.html", {"miFormulario":miFormulario, "usuario":usuario})
 
 def acercadeMi(request):
 

@@ -1,7 +1,7 @@
 from django.db import models
 
 
-#Creados los modelos curso, estudiante, profesor y entregable
+
 
 class Curso(models.Model):
 
