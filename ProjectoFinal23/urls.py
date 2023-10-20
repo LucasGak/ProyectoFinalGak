@@ -2,8 +2,10 @@ from django.urls import path
 from ProjectoFinal23 import views
 from .views import *
 from django.contrib.auth.views import LogoutView
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+def group_required(group):
+    return user_passes_test(lambda u: u.groups.filter(name=group).exists()or u.is_superuser)
 
 urlpatterns = [
     path('', views.inicio, name="inicio"),
@@ -21,10 +23,10 @@ urlpatterns = [
     path('editarProfesor/<int:profesor_id>/', views.editarProfesor, name="EditarProfesor"),
     path('registroProfesores/', views.registroProfesores, name="registroProfesores"),
     path('curso/list', login_required(views.CursoList.as_view()), name='List'),
-    path(r'^(?P<pk>\d+)$', login_required(views.CursoDetalle.as_view()), name='Detail'),
-    path(r'^nuevo$', login_required(views.CursoCreacion.as_view()), name='New'),
-    path(r'^editar/(?P<pk>\d+)$', login_required(views.CursoUpdate.as_view()), name='Edit'),
-    path(r'^borrar/(?P<pk>\d+)$', login_required(views.CursoDelete.as_view()), name='Delete'),
+    path('curso/<int:pk>', login_required(group_required('staff')(views.CursoDetalle.as_view())), name='Detail'),
+    path('curso/nuevo', login_required(group_required('staff')(views.CursoCreacion.as_view())), name='New'),
+    path('curso/editar/<int:pk>', login_required(group_required('staff')(views.CursoUpdate.as_view())), name='Edit'),
+    path('curso/borrar/<int:pk>', login_required(group_required('staff')(views.CursoDelete.as_view())), name='Delete'),
     path('login/', views.login_request, name="login"),
     path('register/', views.register, name='register'),
     path('logout/', LogoutView.as_view(template_name='ProjectoFinal23/logout.html'), name='logout'),

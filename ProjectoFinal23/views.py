@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import UserEditForm
 
 
@@ -40,6 +40,7 @@ def examenes(request):
     return render(request, "ProjectoFinal23/examenes.html", contexto)
 
 @login_required
+@user_passes_test(lambda u: u.is_superuser)
 def cursoFormulario(request):
       
       if request.method == 'POST':
@@ -53,6 +54,7 @@ def cursoFormulario(request):
       return render(request,"ProjectoFinal23/formulario_api.html")
 
 @login_required
+@user_passes_test(lambda u: u.is_staff)
 def formulario_api(request):
     if request.method == "POST":
         
