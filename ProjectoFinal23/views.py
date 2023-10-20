@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import *
-from ProjectoFinal23.forms import BuscaCursoForm, CursoFormulario, ProfesorFormulario, EstudianteFormulario
+from ProjectoFinal23.forms import BuscaCursoForm, CursoFormulario, ProfesorFormulario, EstudianteFormulario, ExamenesFormulario
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
@@ -38,6 +38,28 @@ def examenes(request):
     contexto = {"examenes":examenes}
 
     return render(request, "ProjectoFinal23/examenes.html", contexto)
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def subirExamenes(request):
+    if request.method == 'POST':
+        miFormulario = ExamenesFormulario(request.POST) 
+
+        if miFormulario.is_valid(): 
+
+            informacion = miFormulario.cleaned_data
+
+            examenes = Examenes(nombre=informacion["nombre"], FechaDeEntrega=informacion["FechaDeEntrega"], entregado=informacion["entregado"])
+            
+            examenes.save()
+
+            return render(request, "ProjectoFinal23/padre.html") 
+        
+    else:
+        miFormulario=ExamenesFormulario()
+    
+    return render(request, "ProjectoFinal23/subirExamen.html", {"miFormulario":miFormulario})
+
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
@@ -85,7 +107,6 @@ def profesores(request):
     if request.method == 'POST':
 
         miFormulario = ProfesorFormulario(request.POST) 
-
 
         if miFormulario.is_valid: 
             informacion = miFormulario.cleaned_data

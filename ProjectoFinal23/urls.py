@@ -32,4 +32,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='ProjectoFinal23/logout.html'), name='logout'),
     path('editarPerfil/', views.editarPerfil, name="editarPerfil"),
     path('registroEstudiante/', views.registroEstudiante, name="registroEstudiante"),
+    path('subirExamen/', views.subirExamenes, name='subirExamen'),
 ]

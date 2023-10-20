@@ -48,3 +48,4 @@ HAY QUE ARREGLAR EL LOGIN QUE MUESTRE UN MENSAJE O ALGO DESPUES DE LOGEARSE Y DE
 
 HAY QUE RESTRINGIR EL ACCESO A DISTINTAS CUENTAS QUE NO SEAN DE STAFF/ADMIN 
 
+Increible, ya funciona todo, hay que restringir acceso a distintas partes de la pagina para staff y regular user, despues hacer el video mostrando como funciona la pagina, COMPLETAR EL EXCEL CON LAS PRUEBAS y listo !!!! ENTREGAR !!!!
