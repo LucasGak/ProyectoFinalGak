@@ -2,6 +2,7 @@ from django.urls import path
 from ProjectoFinal23 import views
 from .views import *
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth.decorators import login_required
 
 
 urlpatterns = [
@@ -19,11 +20,11 @@ urlpatterns = [
     path('eliminarProfesor/<int:profesor_id>/', views.eliminarProfesor, name="EliminarProfesor"),
     path('editarProfesor/<int:profesor_id>/', views.editarProfesor, name="EditarProfesor"),
     path('registroProfesores/', views.registroProfesores, name="registroProfesores"),
-    path('curso/list', views.CursoList.as_view(), name='List'),
-    path(r'^(?P<pk>\d+)$', views.CursoDetalle.as_view(), name='Detail'),
-    path(r'^nuevo$', views.CursoCreacion.as_view(), name='New'),
-    path(r'^editar/(?P<pk>\d+)$', views.CursoUpdate.as_view(), name='Edit'),
-    path(r'^borrar/(?P<pk>\d+)$', views.CursoDelete.as_view(), name='Delete'),
+    path('curso/list', login_required(views.CursoList.as_view()), name='List'),
+    path(r'^(?P<pk>\d+)$', login_required(views.CursoDetalle.as_view()), name='Detail'),
+    path(r'^nuevo$', login_required(views.CursoCreacion.as_view()), name='New'),
+    path(r'^editar/(?P<pk>\d+)$', login_required(views.CursoUpdate.as_view()), name='Edit'),
+    path(r'^borrar/(?P<pk>\d+)$', login_required(views.CursoDelete.as_view()), name='Delete'),
     path('login/', views.login_request, name="login"),
     path('register/', views.register, name='register'),
     path('logout/', LogoutView.as_view(template_name='ProjectoFinal23/logout.html'), name='logout'),

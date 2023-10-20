@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso Formulario</title>
-</head>
+{% extends 'ProjectoFinal23/padre.html' %}
+
+{% load static %}
+
+{% block section1 %}
 <body>
     
     <form method="post">
@@ -13,4 +11,4 @@
         <input type="submit" value="Enviar" />
     </form>
 </body>
-</html>
+{% endblock %}

@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso Detalle</title>
-</head>
+{% extends 'ProjectoFinal23/padre.html' %}
+
+{% load static %}
+
+{% block section1 %}
 <body>
     <p>Nombre del Curso: <i>{{ curso.nombre }}</i></p>
     <p>Comision: <i>{{ curso.comision }}</i></p>
@@ -13,4 +11,4 @@
     </p>
     
 </body>
-</html>
+{% endblock %}

@@ -26,6 +26,7 @@ def profesores(request):
 
     return render(request, "ProjectoFinal23/profesores.html")
 
+@login_required
 def estudiantes(request):
 
     return render(request, "ProjectoFinal23/estudiantes.html")
@@ -38,6 +39,7 @@ def examenes(request):
 
     return render(request, "ProjectoFinal23/examenes.html", contexto)
 
+@login_required
 def cursoFormulario(request):
       
       if request.method == 'POST':
@@ -50,6 +52,7 @@ def cursoFormulario(request):
  
       return render(request,"ProjectoFinal23/formulario_api.html")
 
+@login_required
 def formulario_api(request):
     if request.method == "POST":
         
@@ -74,6 +77,7 @@ def formulario_api(request):
 
     return render(request, "ProjectoFinal23/formulario_api.html", {"miFormulario": miFormulario})
 
+@login_required
 def profesores(request):
     
     if request.method == 'POST':
@@ -112,6 +116,7 @@ def buscador_curso(request):
 
     return render(request, "ProjectoFinal23/buscador_curso.html", {"miFormulario": miFormulario})
 
+@login_required
 def leerProfesores(request):
     profesores = Profesor.objects.all()
 
@@ -119,6 +124,7 @@ def leerProfesores(request):
 
     return render(request, "ProjectoFinal23/leerProfesores.html",contexto)
 
+@login_required
 def leerEstudiantes(request):
     estudiantes = Estudiante.objects.all()
 
@@ -164,29 +170,34 @@ def editarProfesor(request, profesor_id):
 
     return render(request, "ProjectoFinal23/formulario_api.html", {"miFormulario":miFormulario, "profesor_id":profesor_id})
 
-#
+
 class CursoList(ListView):
      model=Curso
      template_name = "ProjectoFinal23/cursos_list.html"
 
+
 class CursoDetalle(DetailView):
     model=Curso
     template_name = "ProjectoFinal23/curso_detalle.html"
+
 
 class CursoCreacion(CreateView):
     model=Curso
     success_url="/ProjectoFinal23/curso/list"
     fields = ['nombre','comision']
 
+
 class CursoUpdate(UpdateView):
     model=Curso
     success_url="/ProjectoFinal23/curso/list"
     fields=['nombre','comision']
 
+
 class CursoDelete(DeleteView):
      model=Curso
      success_url="/ProjectoFinal23/curso/list"
-#
+
+
 def login_request(request):
 
     if request.method == "POST":
@@ -231,6 +242,7 @@ def register(request):
 
     return render(request, "ProjectoFinal23/registro.html", {'form':form})
 
+@login_required
 def registroProfesores(request):
     
     if request.method == 'POST':
@@ -252,6 +264,7 @@ def registroProfesores(request):
     
     return render(request, "ProjectoFinal23/formulario_api.html", {"miFormulario":miFormulario})
 
+@login_required
 def registroEstudiante(request):
     
     if request.method == 'POST':
