@@ -3,7 +3,7 @@ from .models import *
 from ProjectoFinal23.forms import BuscaCursoForm, CursoFormulario, ProfesorFormulario, EstudianteFormulario, ExamenesFormulario
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.urls import reverse_lazy
+from django.core.exceptions import ValidationError
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
@@ -303,12 +303,15 @@ def registroEstudiante(request):
         if miFormulario.is_valid(): 
             informacion = miFormulario.cleaned_data
 
-            estudiante = Estudiante(nombre=informacion['nombre'], apellido=informacion['apellido'],
-            email=informacion['email'], curso=informacion['curso'])
+            if Curso.objects.filter(nombre=informacion['curso']).exists():
+                estudiante = Estudiante(nombre=informacion['nombre'], apellido=informacion['apellido'],
+                email=informacion['email'], curso=informacion['curso'])
             
-            estudiante.save()
+                estudiante.save()
 
-            return redirect("alumnoCreado")
+                return redirect("alumnoCreado")
+            else:
+                return redirect('cursoError')
         
     else:
         miFormulario=EstudianteFormulario()
@@ -361,6 +364,9 @@ def alumno_creado(request):
 
 def usuario_creado(request):
     return render(request, "ProjectoFinal23/usuarioCreado.html", {})
+
+def curso_error(request):
+    return render(request, "ProjectoFinal23/cursoError.html", {})
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)

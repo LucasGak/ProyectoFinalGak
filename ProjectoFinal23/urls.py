@@ -37,6 +37,7 @@ urlpatterns = [
     path('profesorCreado/', views.profesor_creado, name='profesorCreado'),
     path('alumnoCreado/', views.alumno_creado, name='alumnoCreado'),
     path('usuarioCreado/', views.usuario_creado, name='usuarioCreado'),
-    path('examenSubido.html', views.examen_subido, name='examenSubido'),
-    path('cursoCreado', views.curso_creado, name='cursoCreado'),
+    path('examenSubido/', views.examen_subido, name='examenSubido'),
+    path('cursoCreado/', views.curso_creado, name='cursoCreado'),
+    path('cursoError/', views.curso_error, name='cursoError'),
 ]

@@ -4,7 +4,8 @@
 {% block section1 %}
 
 
-    <h1>Estudiante creado y registrado en el curso elegido</h1>
+    <h1>El curso al que te queres inscribir como alumno no existe</h1>
+    <p>En la lista de cursos estan los cursos disponibles, si no figura en la lista no te vas a poder inscribir</p>
     
     <button>
         
@@ -14,6 +15,11 @@
     <button>
         
         <li><a href="{% url 'estudiantes' %}"> Volver a estudiantes</a></li>
+        
+    </button>
+    <button>
+        
+        <li><a href="{% url 'cursos' %}"> Ir a cursos</a></li>
         
     </button>
 
