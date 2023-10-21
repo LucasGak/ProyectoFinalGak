@@ -1,4 +1,5 @@
-# PROYECTO FINAL - CURSO PYTHON CODERHOUSE - LUCAS GAK COMISION 47770
+# PROYECTO FINAL - CURSO PYTHON CODERHOUSE 
+# ALUMNO: LUCAS GAK COMISION: 47770
 
 # Nombre del proyecto
     SMART TRAINING
@@ -34,3 +35,16 @@ Para poder entrar en las distintas secciones de la pagina es necesario si o si l
 - Puede crear cursos
 - Puede ver la seccion de examenes en la cual se muestran que examenes estan entregados y cuales no True/False
 
+# Front-End
+- HTML 
+- CSS
+- JavaScript
+- Bootstrap 5.2
+
+# back-end
+- Python 3.11
+- Django version 4.2.5
+
+# Las pruebas realizadas estan guardadas en el repositorio en un archivo xlsx llamado "Proyecto final pruebas"
+
+# Video del proyecto
