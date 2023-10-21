@@ -8,56 +8,29 @@
 
 ## Descripcion del proyecto
 
-Es una pagina web en la que alumnos que quieren entrar a esta academia de educacion fisica orientada a distintas disciplinas se puede registrar y elegir un curso en el momento que se registran.
+Es una pagina web en la que alumnos que quieren entrar a esta academia de educacion fisica orientada a distintas disciplinas/deportes se puede registrar y elegir un curso en el momento que se registran.
 
-Aca voy a ir dejando data de lo que se hizo hasta ahora para seguir al dia siguiente
-- Arme una web Django con patrón MVT
-- Hice la herencia de HTML con el index y padre, y tambien con otros
-- Un formulario para registrar cursos en la BD tanto en HTML como usando la API de Django
-- Agregue el buscador de cursos que funciona directamente en la pagina
-- y este Readme
-- en la parte de cursos puse los 2 formularios
-- cree el usuario profesor clave Final2323
-- Le di un par de toques de front a la web aunque desconozco totalmente HTML, fui siguiendo lo que fue haciendo el profe en las clases
- y fui adaptando segun lo que necesitaba hacer
- 
-- Creado el CRUD de READ para ver la lista de profesores
+Para poder entrar en las distintas secciones de la pagina es necesario si o si logearse con una cuenta, excepto la seccion de "Acerca de mi" el resto tienen vistas limitadas, luego de registrarse y loguearse con su cuenta tendra un acceso limitado a distintas partes de la pagina.
 
-- Creado el CRUD de CREATE para agregar profesores
+###############################################################################
 
-- Creado el CRUD para eliminar profesores
+# Entrando sin registrarse y sin logearse el usuario:
+- Puede usar el buscador de cursos
+- Puede entrar a "acerca de mi"
 
-- Creado el CRUD para editar profesores
+################################################################################
 
-- Cambie la vista de la lista de profesores, se puede ver y editar de una mejor manera
+# Al entrar con una cuenta normal o de alumno que no corresponde a un profesor ya designado como staff:
+- Se puede ver el listado de cursos
+- Se puede ver la lista de alumnos
+- Se puede ver la lista de profesores
+- Se puede registrar como profesor (Aunque luego el admin lo tiene que pasar a staff para tener acceso a otros privilegios)
+- Se puede registrar como alumno
 
-- Arreglado el login y register falta logout
+################################################################################
 
-- Cambiada la pagina de profesores LISTA
+# Con una cuenta de profesor ya autorizada por el admin como "staff":
+- Puede subir la notificacion de el examen correspondiente
+- Puede crear cursos
+- Puede ver la seccion de examenes en la cual se muestran que examenes estan entregados y cuales no True/False
 
-- Hay que arreglar el formulario de registro de estudiantes y que vaya directo a estudiantes en la base de datos
-
-- Arreglado el logout, y edicion de perfiles de usuario, aunque todavia no se pueden cambiar las contraseñas
-
-- Arreglada la vista, ahora muestra el usuario logeado, estan los links para editar el perfil y desloguearse
-
-- muchos cambios no recuerdo cuales, hay que borrar la BD de nuevo y subirla de nuevo, agregar en cursos el nombre de profesor y a los formularios
-tambien hay que hacer que dependiendo del tipo de usuario que este logeado en la pagina que tenga distintos permisos de vista y si puede borrar o editar
-
-HAY QUE ARREGLAR EL LOGIN QUE MUESTRE UN MENSAJE O ALGO DESPUES DE LOGEARSE Y DESPUES DE REGISTRARSE  YA ESTAAAAAAAA               success_url = reverse_lazy('home')
-
-HAY QUE RESTRINGIR EL ACCESO A DISTINTAS CUENTAS QUE NO SEAN DE STAFF/ADMIN 
-
-Despues de registrar un usuario tiene que aparecer un mensaje(YA ESTA), tambien a la hora de registrar un profesor (YA ESTA PROFE) o un alumno(LISTO ALUMNO), falta agregar el campo de "curso" al formulario de estudiante(YA ESTA)
-##############################
-hay que restringir a los profesores(staff) de eliminar otros profesores, que solo lo puedan ver
-
-falta un mensaje despues de subir un examen (LISTO)
-
-LOS ALUMNOS NO TIENEN QUE TENER PERMISO PARA EDITAR O BORRAR PROFESORES
-
-Hay que poner algun condicional o algo que solo permita a los alumnos registrarse a un curso que ya existe, si no existe que no puedan registrarse, esa es la bala de plata
-
-ASEGURARSE DE QUE LO DEL AVATAR HAYA SIDO OPCIONAL Y SINO AGREGAR
-
-Increible, ya funciona todo, hay que restringir acceso a distintas partes de la pagina para staff y regular user, despues hacer el video mostrando como funciona la pagina, COMPLETAR EL EXCEL CON LAS PRUEBAS y listo !!!! ENTREGAR !!!!
