@@ -1,0 +1,25 @@
+{% extends "ProjectoFinal23/padre.html" %}
+{% load static %}
+    
+{% block section1 %}
+
+
+    <h1>Examen subido y agregado a la base de datos</h1>
+    
+    <button>
+        
+        <li><a href="{% url 'inicio' %}"> Volver a inicio</a></li>
+        
+    </button>
+    <button>
+        
+        <li><a href="{% url 'profesores' %}"> Volver a profesores</a></li>
+        
+    </button>
+    <button>
+        
+        <li><a href="{% url 'examenes' %}"> Ir a examenes</a></li>
+        
+    </button>
+
+{% endblock %}

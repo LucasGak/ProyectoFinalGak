@@ -32,5 +32,6 @@ class Examenes(models.Model):
     nombre=models.CharField(max_length=30)
     FechaDeEntrega=models.DateField()
     entregado=models.BooleanField()
+    
     def __str__(self):
         return f"Nombre: {self.nombre} - Fecha De Entrega: {self.FechaDeEntrega} - Entregado: {self.entregado}"

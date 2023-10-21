@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from ProjectoFinal23.forms import BuscaCursoForm, CursoFormulario, ProfesorFormulario, EstudianteFormulario, ExamenesFormulario
 from django.views.generic import ListView
@@ -32,6 +32,7 @@ def estudiantes(request):
     return render(request, "ProjectoFinal23/estudiantes.html")
 
 @login_required
+@user_passes_test(lambda u: u.is_staff)
 def examenes(request):
     examenes = Examenes.objects.all()
 
@@ -53,7 +54,7 @@ def subirExamenes(request):
             
             examenes.save()
 
-            return render(request, "ProjectoFinal23/padre.html") 
+            return redirect('examenSubido') 
         
     else:
         miFormulario=ExamenesFormulario()
@@ -94,7 +95,7 @@ def formulario_api(request):
 
             profesor.save()
 
-            return render(request, "ProjectoFinal23/padre.html")
+            return redirect("cursoCreado")
 
     else:
         miFormulario = CursoFormulario()
@@ -108,7 +109,7 @@ def profesores(request):
 
         miFormulario = ProfesorFormulario(request.POST) 
 
-        if miFormulario.is_valid: 
+        if miFormulario.is_valid(): 
             informacion = miFormulario.cleaned_data
 
             profesor = Profesor (nombre=informacion['nombre'], apellido=informacion['apellido'],
@@ -116,7 +117,7 @@ def profesores(request):
             
             profesor.save()
 
-            return render(request, "ProjectoFinal23/padre.html") 
+            return render(request, "ProjectoFinal23/padre.html", {"profesor": profesor}) 
         
     else:
         miFormulario=ProfesorFormulario() 
@@ -155,6 +156,8 @@ def leerEstudiantes(request):
 
     return render(request, "ProjectoFinal23/leerEstudiantes.html",contexto)
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def eliminarProfesor(request, profesor_id):
  
     profesor = Profesor.objects.get(id=int(profesor_id))
@@ -167,6 +170,8 @@ def eliminarProfesor(request, profesor_id):
  
     return render(request, "ProjectoFinal23/leerProfesores.html", contexto)
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def editarProfesor(request, profesor_id):
 
     if request.method== 'POST':
@@ -258,7 +263,7 @@ def register(request):
 
             username = form.cleaned_data['username']
             form.save()
-            return render (request, "ProjectoFinal23/padre.html", {"mensaje": "Usuario Creado" })
+            return redirect('usuarioCreado')
         
     else:
         form = UserCreationForm()
@@ -280,7 +285,7 @@ def registroProfesores(request):
             
             profesor.save()
 
-            return render(request, "ProjectoFinal23/padre.html") 
+            return redirect('profesorCreado')
         
     else:
         miFormulario=ProfesorFormulario() 
@@ -299,11 +304,11 @@ def registroEstudiante(request):
             informacion = miFormulario.cleaned_data
 
             estudiante = Estudiante(nombre=informacion['nombre'], apellido=informacion['apellido'],
-            email=informacion['email'])
+            email=informacion['email'], curso=informacion['curso'])
             
             estudiante.save()
 
-            return render(request, "ProjectoFinal23/padre.html") 
+            return redirect("alumnoCreado")
         
     else:
         miFormulario=EstudianteFormulario()
@@ -345,3 +350,24 @@ def editarPerfil(request):
 def acercadeMi(request):
 
     return render(request, "ProjectoFinal23/acercadeMi.html")
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def profesor_creado(request):
+    return render(request, 'ProjectoFinal23/profesorCreado.html', {})
+
+def alumno_creado(request):
+    return render(request, "ProjectoFinal23/alumnoCreado.html", {})
+
+def usuario_creado(request):
+    return render(request, "ProjectoFinal23/usuarioCreado.html", {})
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def examen_subido(request):
+    return render(request, "ProjectoFinal23/examenSubido.html", {})
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def curso_creado(request):
+    return render(request, "ProjectoFinal23/cursoCreado.html", {})

@@ -21,12 +21,14 @@ class EstudianteFormulario(forms.Form):
     nombre= forms.CharField(max_length=30)
     apellido= forms.CharField(max_length=30)
     email= forms.EmailField()
+    curso=forms.CharField(max_length=30)
 
 class ExamenesFormulario(forms.Form):
     nombre=forms.CharField(max_length=30)
     FechaDeEntrega=forms.DateField()
     entregado=forms.BooleanField()
-    
+        
+
 class UserEditForm(UserCreationForm):
 
     email = forms.EmailField(label="Ingrese su email:")

@@ -1,0 +1,22 @@
+{% extends "ProjectoFinal23/padre.html" %}
+{% load static %}
+    
+{% block section1 %}
+
+
+    <h1>Usuario creado y agregado a la base de datos</h1>
+    <h1>Ahora te podes logear o si queres podes volver al inicio</h1>
+    
+    <button>
+        
+        <li><a href="{% url 'inicio' %}"> Volver a inicio</a></li>
+        
+    </button>
+    <button>
+        
+        <li><a href="{% url 'login' %}"> Ir al login</a></li>
+        
+    </button>
+
+
+{% endblock %}

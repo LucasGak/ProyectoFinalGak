@@ -44,8 +44,20 @@ Aca voy a ir dejando data de lo que se hizo hasta ahora para seguir al dia sigui
 - muchos cambios no recuerdo cuales, hay que borrar la BD de nuevo y subirla de nuevo, agregar en cursos el nombre de profesor y a los formularios
 tambien hay que hacer que dependiendo del tipo de usuario que este logeado en la pagina que tenga distintos permisos de vista y si puede borrar o editar
 
-HAY QUE ARREGLAR EL LOGIN QUE MUESTRE UN MENSAJE O ALGO DESPUES DE LOGEARSE Y DESPUES DE REGISTRARSE                 success_url = reverse_lazy('home')
+HAY QUE ARREGLAR EL LOGIN QUE MUESTRE UN MENSAJE O ALGO DESPUES DE LOGEARSE Y DESPUES DE REGISTRARSE  YA ESTAAAAAAAA               success_url = reverse_lazy('home')
 
 HAY QUE RESTRINGIR EL ACCESO A DISTINTAS CUENTAS QUE NO SEAN DE STAFF/ADMIN 
+
+Despues de registrar un usuario tiene que aparecer un mensaje(YA ESTA), tambien a la hora de registrar un profesor (YA ESTA PROFE) o un alumno(LISTO ALUMNO), falta agregar el campo de "curso" al formulario de estudiante(YA ESTA)
+##############################
+hay que restringir a los profesores(staff) de eliminar otros profesores, que solo lo puedan ver
+
+falta un mensaje despues de subir un examen (LISTO)
+
+LOS ALUMNOS NO TIENEN QUE TENER PERMISO PARA EDITAR O BORRAR PROFESORES
+
+Hay que poner algun condicional o algo que solo permita a los alumnos registrarse a un curso que ya existe, si no existe que no puedan registrarse, esa es la bala de plata
+
+ASEGURARSE DE QUE LO DEL AVATAR HAYA SIDO OPCIONAL Y SINO AGREGAR
 
 Increible, ya funciona todo, hay que restringir acceso a distintas partes de la pagina para staff y regular user, despues hacer el video mostrando como funciona la pagina, COMPLETAR EL EXCEL CON LAS PRUEBAS y listo !!!! ENTREGAR !!!!
